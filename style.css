@@ -1,0 +1,911 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Comic+Neue:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
+    min-height: 100vh;
+    position: relative;
+    font-family: 'Comic Neue', cursive;
+}
+
+/* Background animations */
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    bottom: -20px;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 105, 180, 0.7);
+    transform: rotate(45deg);
+    animation: float-up 15s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 105, 180, 0.7);
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: -10px;
+    top: 0;
+}
+
+@keyframes float-up {
+    0% {
+        transform: rotate(45deg) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(45deg) translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+/* Stars animation */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Floating images */
+.floating-images {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.floating-img {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: float-around 20s infinite linear;
+}
+
+@keyframes float-around {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+    }
+}
+
+/* Main container */
+.container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Cute character */
+.cute-character {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 3rem;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Message layers */
+.message-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.message-layer.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.message-content {
+    text-align: center;
+    padding: 40px;
+    max-width: 600px;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.message-content h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-content p {
+    font-size: 1.3rem;
+    color: #5a189a;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.emoji-rain {
+    font-size: 2rem;
+    margin: 20px 0;
+}
+
+/* Navigation buttons */
+.nav-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.nav-btn {
+    padding: 12px 30px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Fredoka One', cursive;
+}
+
+.nav-btn:hover {
+    background-color: #ff5252;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Birthday message */
+.birthday-message {
+    text-align: center;
+    margin-bottom: 30px;
+    animation: bounce 2s infinite alternate;
+}
+
+.birthday-message h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 4rem;
+    color: #ff6b6b;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+.birthday-message p {
+    font-size: 1.5rem;
+    color: #5a189a;
+    margin-bottom: 20px;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Balloons */
+.balloons-container {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    z-index: 3;
+}
+
+.balloon {
+    width: 80px;
+    height: 100px;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: sway 4s infinite ease-in-out;
+}
+
+.balloon:nth-child(1) {
+    background-color: rgba(255, 105, 180, 0.8);
+    animation-delay: 0.5s;
+}
+
+.balloon:nth-child(2) {
+    background-color: rgba(106, 90, 205, 0.8);
+    animation-delay: 1s;
+}
+
+.balloon:nth-child(3) {
+    background-color: rgba(255, 215, 0, 0.8);
+    animation-delay: 1.5s;
+}
+
+.balloon:nth-child(4) {
+    background-color: rgba(50, 205, 50, 0.8);
+    animation-delay: 2s;
+}
+
+.balloon::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.2);
+    left: 50%;
+    bottom: -100px;
+    transform: translateX(-50%);
+}
+
+.balloon:hover {
+    transform: scale(1.1);
+}
+
+.balloon-pop {
+    animation: pop 0.5s forwards;
+}
+
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(20px) rotate(5deg);
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Birthday cake */
+.cake-container {
+    position: relative;
+    margin: 40px 0;
+    cursor: pointer;
+    width: 250px;
+    height: 200px;
+}
+
+.cake {
+    width: 250px;
+    height: 200px;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.cake.exploded {
+    animation: explode 1s forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.cake-piece {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #ff6b81;
+    border-radius: 10px;
+    opacity: 0;
+}
+
+.cake-piece.flying {
+    animation: fly 1s forwards;
+}
+
+@keyframes fly {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.cake-base {
+    position: absolute;
+    bottom: 0;
+    width: 250px;
+    height: 80px;
+    background-color: #f8c8dc;
+    border-radius: 10px;
+}
+
+.cake-middle {
+    position: absolute;
+    bottom: 70px;
+    width: 200px;
+    height: 60px;
+    background-color: #ff9eb5;
+    border-radius: 10px;
+    left: 25px;
+}
+
+.cake-top {
+    position: absolute;
+    bottom: 120px;
+    width: 150px;
+    height: 50px;
+    background-color: #ff6b81;
+    border-radius: 10px;
+    left: 50px;
+}
+
+.candle {
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    background-color: #ffeb3b;
+    bottom: 170px;
+    border-radius: 2px;
+}
+
+.candle:nth-child(4) {
+    left: 70px;
+}
+
+.candle:nth-child(5) {
+    left: 95px;
+}
+
+.candle:nth-child(6) {
+    left: 120px;
+}
+
+.candle:nth-child(7) {
+    left: 145px;
+}
+
+.candle:nth-child(8) {
+    left: 170px;
+}
+
+.flame {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 20px;
+    background-color: #ff9800;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flicker 0.5s infinite alternate;
+}
+
+.flame.out {
+    animation: blow-out 0.5s forwards;
+}
+
+@keyframes flicker {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes blow-out {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Special person image */
+.special-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 10;
+}
+
+.special-image.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.image-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.image-frame::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, #ff6b6b, #ff9eb5, #5a189a, #ff6b6b);
+    border-radius: 50%;
+    z-index: -1;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Memory photos */
+.memory-photos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.memory-photo {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: all 0.5s ease;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.memory-photo.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.memory-photo:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.memory-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.memory-photo .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    padding: 8px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+/* Special message modal */
+.special-message-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.special-message-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.message-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.5s ease;
+}
+
+.special-message-modal.show .message-modal-content {
+    transform: scale(1);
+}
+
+.message-modal-content h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5rem;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+}
+
+.message-modal-content p {
+    font-size: 1.2rem;
+    color: #5a189a;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.close-modal {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Fredoka One', cursive;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background-color: #ff5252;
+    transform: translateY(-3px);
+}
+
+/* Photo modal */
+.photo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.photo-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.photo-modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    transform: scale(0.8);
+    transition: transform 0.5s ease;
+}
+
+.photo-modal.show .photo-modal-content {
+    transform: scale(1);
+}
+
+.photo-modal img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.photo-modal-caption {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+}
+
+.close-photo-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-photo-modal:hover {
+    transform: scale(1.2);
+}
+
+/* Interactive buttons */
+.interactive-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 24px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Fredoka One', cursive;
+}
+
+.btn:hover {
+    background-color: #ff5252;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: #f0f;
+    position: absolute;
+    animation: confetti-fall 3s linear forwards;
+    z-index: 1000;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Audio controls */
+.audio-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.audio-controls i {
+    color: #ff6b6b;
+    font-size: 1.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .birthday-message h1 {
+        font-size: 2.5rem;
+    }
+
+    .birthday-message p {
+        font-size: 1.2rem;
+    }
+
+    .balloon {
+        width: 60px;
+        height: 80px;
+    }
+
+    .cake-container {
+        width: 200px;
+        height: 160px;
+    }
+
+    .cake {
+        width: 200px;
+        height: 160px;
+    }
+
+    .cake-base {
+        width: 200px;
+        height: 60px;
+    }
+
+    .cake-middle {
+        width: 160px;
+        height: 50px;
+        left: 20px;
+    }
+
+    .cake-top {
+        width: 120px;
+        height: 40px;
+        left: 40px;
+    }
+
+    .candle:nth-child(4) {
+        left: 55px;
+    }
+
+    .candle:nth-child(5) {
+        left: 75px;
+    }
+
+    .candle:nth-child(6) {
+        left: 95px;
+    }
+
+    .candle:nth-child(7) {
+        left: 115px;
+    }
+
+    .candle:nth-child(8) {
+        left: 135px;
+    }
+
+    .special-image {
+        width: 250px;
+        height: 250px;
+    }
+
+    .message-content h2 {
+        font-size: 2rem;
+    }
+
+    .message-content p {
+        font-size: 1.1rem;
+    }
+
+    .cute-character {
+        font-size: 2rem;
+    }
+
+    .floating-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .memory-photo {
+        width: 90px;
+        height: 90px;
+    }
+
+    .message-modal-content h2 {
+        font-size: 2rem;
+    }
+
+    .message-modal-content p {
+        font-size: 1rem;
+    }
+}
